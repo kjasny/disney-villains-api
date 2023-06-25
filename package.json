@@ -5,7 +5,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/**/*.test.js",
     "lint:fix": "./node_modules/.bin/eslint --format codeframe --fix ."
   },
   "keywords": [],
@@ -17,8 +17,12 @@
     "sequelize": "^6.32.0"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
     "eslint": "^8.42.0",
     "eslint-formatter-codeframe": "^7.32.1",
-    "nodemon": "^2.0.22"
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "sinon": "^15.2.0",
+    "sinon-chai": "^3.7.0"
   }
 }

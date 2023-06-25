@@ -1,20 +1,28 @@
 const { getAllVillains, getVillainBySlug, addNewVillain } = require('../models/models')
 
 const getAllVillainsController = async (request, response) => {
-  const allVillains = await getAllVillains()
+  try {
+    const allVillains = await getAllVillains()
 
-  return response.send(allVillains)
+    return response.send(allVillains)
+  } catch (error) {
+    return response.sendStatus(500)
+  }
 }
 
 const getVillainBySlugController = async (request, response) => {
-  const { slug } = request.params
-  const foundVillain = await getVillainBySlug(slug)
+  try {
+    const { slug } = request.params
+    const foundVillain = await getVillainBySlug(slug)
 
-  if (!foundVillain) {
-    return response.status(404).send('Villain not found')
+    if (!foundVillain.slug) {
+      return response.sendStatus(404)
+    }
+
+    return response.send(foundVillain)
+  } catch (error) {
+    return response.sendStatus(500)
   }
-
-  return response.send(foundVillain)
 }
 
 const addNewVillainController = async (request, response) => {
@@ -26,7 +34,7 @@ const addNewVillainController = async (request, response) => {
 
   const addedVillain = await addNewVillain(newVillain)
 
-  return response.send(addedVillain)
+  return response.status(201).send(addedVillain)
 }
 
 
